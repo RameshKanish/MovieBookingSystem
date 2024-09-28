@@ -12,7 +12,6 @@ import java.sql.Timestamp;
 @Entity(name = "users")
 @Data
 public class Users {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
