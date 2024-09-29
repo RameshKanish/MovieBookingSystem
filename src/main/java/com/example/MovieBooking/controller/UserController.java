@@ -2,6 +2,7 @@ package com.example.MovieBooking.controller;
 
 
 import com.example.MovieBooking.dtos.UsersDto;
+import com.example.MovieBooking.exception.EmailFoundException;
 import com.example.MovieBooking.models.Users;
 import com.example.MovieBooking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/createUser")
-    public ResponseEntity<Users> createUser(@RequestBody UsersDto usersDto){
+    public ResponseEntity<Users> createUser(@RequestBody UsersDto usersDto) throws EmailFoundException {
         Users user = userService.createUser(usersDto.getName() ,usersDto.getPassword() , usersDto.getEmail());
         return new ResponseEntity<>(user , HttpStatus.OK);
     }

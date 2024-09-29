@@ -1,5 +1,6 @@
 package com.example.MovieBooking.service;
 
+import com.example.MovieBooking.exception.EmailFoundException;
 import com.example.MovieBooking.models.Users;
 import com.example.MovieBooking.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -19,7 +22,12 @@ public class UserImpel implements UserService{
     private EmailService emailService;
 
     @Override
-    public Users createUser(String userName, String password, String email) {
+    public Users createUser(String userName, String password, String email) throws EmailFoundException {
+        List<Users> movieList = userRepository.findByEmail((email));
+
+        if(movieList.size() > 0){
+            throw new EmailFoundException("Mail is already present");
+        }
         Users users = new Users();
         users.setName(userName);
         users.setEmail(email);
