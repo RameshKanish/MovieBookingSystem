@@ -1,9 +1,6 @@
 package com.example.MovieBooking.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -18,6 +15,9 @@ public class Users {
 
     private String name;
     private String email;
+
+    @Column(nullable = false)
     private String password;
+
     private Timestamp created_at;
 }

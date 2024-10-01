@@ -43,4 +43,13 @@ public class UserImpel implements UserService{
 
         return users;
     }
+    public Boolean signIn(String  email , String password){
+        Optional<Users> userOptional = userRepository.findByEmailAndPassword( email , password);
+        System.out.println("UserDetails"+userOptional);
+        // Check if the user is present
+        if (userOptional.isPresent()) {
+            return true;
+        }
+        return false;
+    }
 }
