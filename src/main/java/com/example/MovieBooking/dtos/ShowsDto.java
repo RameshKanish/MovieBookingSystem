@@ -11,4 +11,5 @@ import java.sql.Time;
 public class ShowsDto {
     private Time show_time;
     private boolean showIsActive;
+    private int numberOfSeats;
 }

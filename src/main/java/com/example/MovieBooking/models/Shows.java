@@ -3,6 +3,7 @@ package com.example.MovieBooking.models;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.sql.Time;
+import java.util.List;
 
 @Entity(name = "shows")
 @Data // Lombok annotation to generate getters, setters, etc.
@@ -20,4 +21,7 @@ public class Shows {
     private boolean showIsActive; // Fixed typo: 'showIsActice' to 'showIsActive'
     private boolean isDeleted;
 
+
+    @OneToMany
+    private List<Seats> seats;
 }

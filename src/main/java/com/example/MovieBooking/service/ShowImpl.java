@@ -21,26 +21,21 @@ public class ShowImpl implements ShowService{
     private MovieService movieService;
 
     @Override
-    public Shows createShows(Time showTime , boolean showIsActive) throws MovieNotFoundException{
+    public Shows createShows(Time showTime , boolean showIsActive , int numberOfSeats) throws MovieNotFoundException{
         List<Movies> moviesList = movieService.getAllMovies();
 
         if(moviesList.isEmpty()){
             throw new MovieNotFoundException("MovieNot found");
         }
 
-        Shows createdShow = null;
-        for(Movies movies: moviesList){
-            if(!movies.isDeleted()){
-                Shows newShows = new Shows();
-                newShows.setMovie(movies);
-                newShows.setShow_time(showTime);
-                newShows.setShowIsActive(showIsActive);
-                newShows.setDeleted(false);
 
-                createdShow = showsRepository.save(newShows);
-                return createdShow;
-            }
-        }
+        Shows createdShow = null;
+        Shows newShows = new Shows();
+        newShows.setShow_time(showTime);
+        newShows.setShowIsActive(showIsActive);
+        newShows.setDeleted(false);
+
+        createdShow = showsRepository.save(newShows);
         return createdShow;
     }
 }

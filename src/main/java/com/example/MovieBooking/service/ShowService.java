@@ -6,5 +6,5 @@ import com.example.MovieBooking.models.Shows;
 import java.sql.Time;
 
 public interface ShowService {
-    public Shows createShows(Time showTime , boolean showIsActive) throws MovieNotFoundException;
+    public Shows createShows(Time showTime , boolean showIsActive , int numberOfSeats) throws MovieNotFoundException;
 }
