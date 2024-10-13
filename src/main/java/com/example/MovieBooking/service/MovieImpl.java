@@ -15,6 +15,12 @@ public class MovieImpl implements MovieService{
 
     @Override
     public Movies createMovie(String movieName) {
+        Movies movies = mr.findByMovieName(movieName);
+        System.out.println("Movies"+movies);
+
+        if(movies != null){
+            return movies;
+        }
         Movies movie = new Movies();  // Create a new Movies object
         movie.setMovieName(movieName); // Set the movie name
         return mr.save(movie);

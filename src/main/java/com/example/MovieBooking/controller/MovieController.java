@@ -19,9 +19,11 @@ public class MovieController {
     private MovieService movieService;
 
     @PostMapping("/create")
-    public ResponseEntity<Movies> createBooking(@RequestBody MoviesDto mdto){
+    public ResponseEntity<Object> createMovie(@RequestBody MoviesDto mdto){
         Movies movies = movieService.createMovie(mdto.getMovieName());
-
+        if(movies == null){
+            return new ResponseEntity<>("Already movie exists", HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(movies , HttpStatus.OK);
     }
 }

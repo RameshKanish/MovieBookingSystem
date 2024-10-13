@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<Users, Long> {
     List<Users> findByEmail(String email);
 
+
     @Query(value = "SELECT * FROM users u WHERE u.email = :email AND u.password = :password", nativeQuery = true)
     Optional<Users> findByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 }
