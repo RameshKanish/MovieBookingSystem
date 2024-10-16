@@ -25,6 +25,7 @@ public class UserImpel implements UserService{
     public Users createUser(String userName, String password, String email) throws EmailFoundException {
         List<Users> movieList = userRepository.findByEmail((email));
 
+        System.out.println("movieList" + movieList);
         if(movieList.size() > 0){
             throw new EmailFoundException("Mail is already present");
         }
