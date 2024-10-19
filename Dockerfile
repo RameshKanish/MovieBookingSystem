@@ -8,21 +8,23 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 
-# Step 4: Build the project using Maven
-# Including tests here. You can skip tests by using `-DskipTests` if desired.
+# Step 4: Build the project using Maven (skip tests for faster build)
 RUN mvn clean package -DskipTests
 
-# Step 5: Use a lightweight JDK image to run the Spring Boot application
-FROM eclipse-temurin:17-jdk-alpine
+# Step 5: Check the contents of the target directory to confirm the WAR file
+RUN ls -la /app/target
 
-# Step 6: Set the working directory for the runtime environment
-WORKDIR /app
+# Step 6: Use Tomcat base image to run the WAR file
+FROM tomcat:9.0.65-jdk17-openjdk
 
-# Step 7: Copy the built .jar file from the Maven build container
-COPY --from=build /app/target/MovieBooking-0.0.1-SNAPSHOT.jar /app/app.jar
+# Step 7: Set the working directory for Tomcat
+WORKDIR /usr/local/tomcat/webapps
 
-# Step 8: Expose the port that the application runs on (default 8080)
+# Step 8: Copy the WAR file from the build container to Tomcat's webapps folder
+COPY --from=build /app/target/MovieBooking-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
+
+# Step 9: Expose Tomcat's default port (8080)
 EXPOSE 8080
 
-# Step 9: Run the application using java -jar
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+# Step 10: Start Tomcat (this is the default entrypoint for the tomcat image)
+CMD ["catalina.sh", "run"]
