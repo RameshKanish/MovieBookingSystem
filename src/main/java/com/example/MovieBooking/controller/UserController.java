@@ -20,7 +20,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/signUp")
+        @PostMapping("/signUp")
     public ResponseEntity<Users> createUser(@RequestBody UsersDto usersDto) throws EmailFoundException {
         Users user = userService.createUser(usersDto.getName() ,usersDto.getPassword() , usersDto.getEmail());
         return new ResponseEntity<>(user , HttpStatus.OK);
