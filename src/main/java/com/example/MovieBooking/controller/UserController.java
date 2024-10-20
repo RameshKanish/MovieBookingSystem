@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://movie-booking-b8kw.onrender.com") // Frontend URL on Render
 public class UserController {
 
     @Autowired
