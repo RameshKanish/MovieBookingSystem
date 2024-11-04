@@ -4,15 +4,14 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 
 @Entity(name = "booking")
 @Data
 public class Booking {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private long id;
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "user_id" , nullable = false)
@@ -22,6 +21,8 @@ public class Booking {
     @JoinColumn(name = "show_id" , nullable = false)
     private Shows shows ;
 
+    @OneToOne(mappedBy = "booking")
+    private Payment payment;
 
     private String status;
     private Timestamp created_at;
