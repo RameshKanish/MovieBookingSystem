@@ -22,7 +22,7 @@ public class UserImpel implements UserService{
     private EmailService emailService;
 
     @Override
-    public Users createUser(String userName, String password, String email) throws EmailFoundException {
+    public Users signUp(String userName, String password, String email) throws EmailFoundException {
         List<Users> movieList = userRepository.findByEmail((email));
 
         System.out.println("movieList" + movieList);

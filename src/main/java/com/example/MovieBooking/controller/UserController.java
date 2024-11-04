@@ -12,6 +12,10 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/auth")
 public class UserController {
@@ -21,17 +25,23 @@ public class UserController {
 
         @PostMapping("/signUp")
     public ResponseEntity<Users> createUser(@RequestBody UsersDto usersDto) throws EmailFoundException {
-        Users user = userService.createUser(usersDto.getName() ,usersDto.getPassword() , usersDto.getEmail());
+        Users user = userService.signUp(usersDto.getName() ,usersDto.getPassword() , usersDto.getEmail());
         return new ResponseEntity<>(user , HttpStatus.OK);
     }
 
     @PostMapping("/signIn")
-    public ResponseEntity<Boolean> signIn(@RequestBody UsersDto usersDto){
+    public ResponseEntity<Map> signIn(@RequestBody UsersDto usersDto){
 
         boolean isValidUser = userService.signIn(usersDto.getEmail() , usersDto.getPassword());
-        if(isValidUser){
-            return new ResponseEntity<>(isValidUser , HttpStatus.OK);
+        Map<String, String> response = new HashMap<>();
+        if (isValidUser) {
+            response.put("status", "Success");
+            response.put("message", "Sign-in successful");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            response.put("status", "Failure");
+            response.put("message", "Sign-in failed");
+            return new ResponseEntity<>(response, HttpStatus.NOT_ACCEPTABLE);
         }
-        return new ResponseEntity<>(isValidUser , HttpStatus.NOT_ACCEPTABLE);
     }
 }
