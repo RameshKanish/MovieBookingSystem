@@ -1,7 +1,7 @@
 package com.example.MovieBooking.controller;
 
 import com.example.MovieBooking.dtos.ShowsDto;
-import com.example.MovieBooking.exception.MovieNotFoundException;
+import com.example.MovieBooking.exception.MovieNotFoundException; 
 import com.example.MovieBooking.models.Shows;
 import com.example.MovieBooking.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
