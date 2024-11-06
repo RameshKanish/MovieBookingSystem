@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
-import java.util.List;
-
 
 @Service
 public class ShowImpl implements ShowService{
@@ -21,19 +19,20 @@ public class ShowImpl implements ShowService{
     private MovieService movieService;
 
     @Override
-    public Shows createShows(Time showTime , boolean showIsActive , int numberOfSeats) throws MovieNotFoundException{
-        List<Movies> moviesList = movieService.getAllMovies();
+    public Shows createShows(Time showTime , boolean showIsActive , int numberOfSeats , int movie_id) throws MovieNotFoundException{
 
-        if(moviesList.isEmpty()){
-            throw new MovieNotFoundException("MovieNot found");
+        Movies movies = movieService.getMovieById(movie_id);
+        if(movies == null){
+            throw new MovieNotFoundException("Movie not found with id: " + movie_id);
         }
-
 
         Shows createdShow = null;
         Shows newShows = new Shows();
         newShows.setShow_time(showTime);
         newShows.setShowIsActive(showIsActive);
         newShows.setDeleted(false);
+        newShows.setMovie(movies);
+        newShows.setSeats(numberOfSeats);
 
         createdShow = showsRepository.save(newShows);
         return createdShow;

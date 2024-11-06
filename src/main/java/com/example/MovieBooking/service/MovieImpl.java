@@ -1,5 +1,7 @@
 package com.example.MovieBooking.service;
 
+import com.example.MovieBooking.exception.MovieNotFoundException;
+import com.example.MovieBooking.models.Booking;
 import com.example.MovieBooking.models.Movies;
 import com.example.MovieBooking.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,6 @@ public class MovieImpl implements MovieService{
     @Override
     public Movies createMovie(String movieName) {
         Movies movies = mr.findByMovieName(movieName);
-        System.out.println("Movies"+movies);
 
         if(movies != null){
             return movies;
@@ -26,8 +27,11 @@ public class MovieImpl implements MovieService{
         return mr.save(movie);
     }
 
-
     public List<Movies> getAllMovies(){
         return mr.findAll();
+    }
+
+    public Movies getMovieById(int movie_id) throws MovieNotFoundException {
+        return mr.findById(movie_id).orElseThrow(() -> new MovieNotFoundException("Movie not found"));
     }
 }

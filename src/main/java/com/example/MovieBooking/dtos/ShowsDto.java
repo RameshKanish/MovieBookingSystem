@@ -12,4 +12,5 @@ public class ShowsDto {
     private Time show_time;
     private boolean showIsActive;
     private int numberOfSeats;
+    private int movie_id;
 }

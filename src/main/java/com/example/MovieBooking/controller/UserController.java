@@ -18,15 +18,20 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/auth")
+
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-        @PostMapping("/signUp")
-    public ResponseEntity<Users> createUser(@RequestBody UsersDto usersDto) throws EmailFoundException {
-        Users user = userService.signUp(usersDto.getName() ,usersDto.getPassword() , usersDto.getEmail());
-        return new ResponseEntity<>(user , HttpStatus.OK);
+    @PostMapping("/signUp")
+    public ResponseEntity<?> createUser(@RequestBody UsersDto usersDto) throws EmailFoundException {
+        try{
+            Users user = userService.signUp(usersDto.getName() ,usersDto.getPassword() , usersDto.getEmail());
+            return new ResponseEntity<>(user, HttpStatus.CREATED);
+        }catch (EmailFoundException ex){
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+        }
     }
 
     @PostMapping("/signIn")

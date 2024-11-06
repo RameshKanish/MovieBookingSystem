@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/movies")
@@ -25,5 +24,12 @@ public class MovieController {
             return new ResponseEntity<>("Already movie exists", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(movies , HttpStatus.OK);
+    }
+
+
+    @GetMapping("/getAllMovies")
+    public ResponseEntity<List<Movies>> getAllMovies(){
+        List<Movies> movie =movieService.getAllMovies();
+        return  new ResponseEntity<>(movie , HttpStatus.ACCEPTED);
     }
 }

@@ -22,7 +22,7 @@ public class ShowController {
     @PostMapping("/createShow")
     public ResponseEntity<Shows> createShows(@RequestBody ShowsDto showsDto)throws MovieNotFoundException {
 
-        Shows show = showService.createShows(showsDto.getShow_time() , showsDto.isShowIsActive() , showsDto.getNumberOfSeats());
+        Shows show = showService.createShows(showsDto.getShow_time() , showsDto.isShowIsActive() , showsDto.getNumberOfSeats() , showsDto.getMovie_id());
         if(show == null){
             throw new NullPointerException();
         }
