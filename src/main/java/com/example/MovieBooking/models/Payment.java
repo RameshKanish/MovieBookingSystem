@@ -12,7 +12,7 @@ public class Payment {
     private UUID id;
 
     @OneToOne
-    @JoinColumn(name = "booking_id" , nullable = false)
+    @JoinColumn(name = "booking_id")
     private Booking booking;
 
     private Double paymentAmount;

@@ -1,7 +1,7 @@
 package com.example.MovieBooking.controller;
 import com.example.MovieBooking.dtos.MoviesDto;
 import com.example.MovieBooking.models.Movies;
-import com.example.MovieBooking.service.MovieService;
+import com.example.MovieBooking.service.movies.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 

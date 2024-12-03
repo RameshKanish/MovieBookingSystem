@@ -1,8 +1,9 @@
-package com.example.MovieBooking.service;
+package com.example.MovieBooking.service.users;
 
 import com.example.MovieBooking.exception.EmailFoundException;
 import com.example.MovieBooking.models.Users;
 import com.example.MovieBooking.repository.UserRepository;
+import com.example.MovieBooking.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.Optional;
 
 
 @Service
-public class UserImpel implements UserService{
+public class UserImpel implements UserService {
 
     @Autowired
     private UserRepository userRepository;

@@ -1,4 +1,4 @@
-package com.example.MovieBooking.service;
+package com.example.MovieBooking.service.users;
 
 import com.example.MovieBooking.exception.EmailFoundException;
 import com.example.MovieBooking.models.Users;

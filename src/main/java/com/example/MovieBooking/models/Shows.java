@@ -1,27 +1,31 @@
 package com.example.MovieBooking.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.sql.Time;
 import java.util.List;
 
-@Entity(name = "shows")
-@Data // Lombok annotation to generate getters, setters, etc.
+@Entity
+@Data
 public class Shows {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne // Many shows can belong to one movie
-    @JoinColumn(name = "movie_id") // Foreign key to the Movies table
-    private Movies movie; // Changed from 'movies' to 'movie'
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "movie_id")
+    private Movies movie;
 
-    private Time show_time;
-    private boolean showIsActive; // Fixed typo: 'showIsActice' to 'showIsActive'
+    private Time showTime;
+    private boolean showIsActive;
     private boolean isDeleted;
 
-
-    @OneToMany
+    @OneToMany(mappedBy = "show", fetch = FetchType.LAZY)
+    @JsonManagedReference // Parent side of the relationship
     private List<Seats> seats;
+
+    // Other fields and methods
 }

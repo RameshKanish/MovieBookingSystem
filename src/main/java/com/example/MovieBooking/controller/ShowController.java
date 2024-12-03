@@ -3,7 +3,7 @@ package com.example.MovieBooking.controller;
 import com.example.MovieBooking.dtos.ShowsDto;
 import com.example.MovieBooking.exception.MovieNotFoundException; 
 import com.example.MovieBooking.models.Shows;
-import com.example.MovieBooking.service.ShowService;
+import com.example.MovieBooking.service.shows.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,6 @@ public class ShowController {
 
     @PostMapping("/createShow")
     public ResponseEntity<Shows> createShows(@RequestBody ShowsDto showsDto)throws MovieNotFoundException {
-
         Shows show = showService.createShows(showsDto.getShow_time() , showsDto.isShowIsActive() , showsDto.getNumberOfSeats() , showsDto.getMovie_id());
         if(show == null){
             throw new NullPointerException();

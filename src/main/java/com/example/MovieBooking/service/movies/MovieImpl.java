@@ -1,7 +1,6 @@
-package com.example.MovieBooking.service;
+package com.example.MovieBooking.service.movies;
 
 import com.example.MovieBooking.exception.MovieNotFoundException;
-import com.example.MovieBooking.models.Booking;
 import com.example.MovieBooking.models.Movies;
 import com.example.MovieBooking.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import java.util.List;
 
 
 @Service
-public class MovieImpl implements MovieService{
+public class MovieImpl implements MovieService {
     @Autowired
     MovieRepository mr;
 

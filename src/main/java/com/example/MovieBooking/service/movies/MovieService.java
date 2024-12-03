@@ -1,4 +1,4 @@
-package com.example.MovieBooking.service;
+package com.example.MovieBooking.service.movies;
 
 import com.example.MovieBooking.exception.MovieNotFoundException;
 import com.example.MovieBooking.models.Movies;

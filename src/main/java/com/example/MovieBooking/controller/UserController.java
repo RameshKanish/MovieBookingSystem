@@ -4,17 +4,14 @@ package com.example.MovieBooking.controller;
 import com.example.MovieBooking.dtos.UsersDto;
 import com.example.MovieBooking.exception.EmailFoundException;
 import com.example.MovieBooking.models.Users;
-import com.example.MovieBooking.service.UserService;
-import org.apache.catalina.User;
+import com.example.MovieBooking.service.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/auth")
